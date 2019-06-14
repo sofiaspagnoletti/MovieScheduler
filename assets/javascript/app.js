@@ -18,27 +18,26 @@ var database = firebase.database();
 $("#add-movie-btn").on("click", function(event) {
     event.preventDefault();
   
-   
-    var movName = $("#input-movie-name").val().trim();
-    var movGenre = $("#input-movie-genre").val().trim();
-    var movFreq = $("#input-movie-frequency").val().trim();
-    var movTime = $("#input-first-showtime").val().trim();
+    var movieName = $("#input-movie-name").val().trim();
+    var movieGenre = $("#input-movie-genre").val().trim();
+    var movieFreq = $("#input-movie-frequency").val().trim();
+    var movieTime = $("#input-first-showtime").val().trim();
   
     
     var newMovie = {
-      name: movName,
-      genre: movGenre,
-      frequency: movFreq,
-      time: movTime,
+      name: movieName,
+      genre: movieGenre,
+      frequency: movieFreq,
+      time: movieTime,
     };
 
     database.ref().push(newMovie);
 
   
-  console.log(movName);
-  console.log(movGenre);
-  console.log(movFreq);
-  console.log(movTime);
+  console.log(movieName);
+  console.log(movieGenre);
+  console.log(movieFreq);
+  console.log(movieTime);
 
 //   alert("Movie successfully added");
 
@@ -51,24 +50,35 @@ $("#add-movie-btn").on("click", function(event) {
 database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
   
-    var movName = childSnapshot.val().name;
-    var movGenre = childSnapshot.val().genre;
-    var movFreq = childSnapshot.val().frequency;
-    var movTime = childSnapshot.val().time;
+    var movieName = childSnapshot.val().name;
+    var movieGenre = childSnapshot.val().genre;
+    var movieFreq = childSnapshot.val().frequency;
+    var movieTime = childSnapshot.val().time;
   
-    console.log(movName);
-    console.log(movGenre);
-    console.log(movFreq);
-    console.log(movTime);
+    console.log(movieName);
+    console.log(movieGenre);
+    console.log(movieFreq);
+    console.log(movieTime);
 
-    var empStartPretty = moment.unix(movTime).format("HH:mm");
+    // var empStartPretty = moment.unix(movTime).format("HH:mm");
+    var nextShowTime = moment(movieTime, "HH:mm");
+    var now = moment();
+
+    // While movie already started
+    while(now > nextShowTime) {
+        // Calculate the next movie
+        nextShowTime = nextShowTime.add(movieFreq, 'minutes');
+    }
+
+    // nextShowTime is in the future at this point
+    var nextShowTimeIn = nextShowTime.diff(now, 'minutes');
 
     var newRow = $("<tr>").append(
-        $("<td>").text(movName),
-        $("<td>").text(movGenre),
-        $("<td>").text(movFreq),
-        $("<td>").text(movTime),
-        // $("<td>").text(empMonths)
+        $("<td>").text(movieName),
+        $("<td>").text(movieGenre),
+        $("<td>").text(movieFreq),
+        $("<td>").text(nextShowTime.format("HH:mm")),
+        $("<td>").text(nextShowTimeIn)
       );
     
       // Append the new row to the table
