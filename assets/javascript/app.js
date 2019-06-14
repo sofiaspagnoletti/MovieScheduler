@@ -21,8 +21,8 @@ $("#add-movie-btn").on("click", function(event) {
    
     var movName = $("#input-movie-name").val().trim();
     var movGenre = $("#input-movie-genre").val().trim();
-    var movFreq = moment($("#input-movie-frequency").val().trim(), "MM/DD/YYYY").format("X");
-    var movTime = $("#input-time-next").val().trim();
+    var movFreq = $("#input-movie-frequency").val().trim();
+    var movTime = $("#input-first-showtime").val().trim();
   
     
     var newMovie = {
@@ -40,12 +40,12 @@ $("#add-movie-btn").on("click", function(event) {
   console.log(movFreq);
   console.log(movTime);
 
-  alert("Movie successfully added");
+//   alert("Movie successfully added");
 
   $("#input-movie-name").val("");
   $("#input-movie-genre").val("");
   $("#input-movie-frequency").val("");
-  $("#input-time-next").val("");
+  $("#input-first-showtime").val("");
 });
   
 database.ref().on("child_added", function(childSnapshot) {
@@ -53,7 +53,7 @@ database.ref().on("child_added", function(childSnapshot) {
   
     var movName = childSnapshot.val().name;
     var movGenre = childSnapshot.val().genre;
-    var movFreq = childSnapshot.val().freq;
+    var movFreq = childSnapshot.val().frequency;
     var movTime = childSnapshot.val().time;
   
     console.log(movName);
@@ -61,14 +61,14 @@ database.ref().on("child_added", function(childSnapshot) {
     console.log(movFreq);
     console.log(movTime);
 
-   
+    var empStartPretty = moment.unix(movTime).format("HH:mm");
 
     var newRow = $("<tr>").append(
         $("<td>").text(movName),
         $("<td>").text(movGenre),
         $("<td>").text(movFreq),
-        // $("<td>").text(empMonths),
-        $("<td>").text(movTime)
+        $("<td>").text(movTime),
+        // $("<td>").text(empMonths)
       );
     
       // Append the new row to the table

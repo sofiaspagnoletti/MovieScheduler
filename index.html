@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Bangers|Luckiest+Guy&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
@@ -20,17 +20,17 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container text-center">
-            <h1 class="display-4 font-italic">Anytime is movie time</h1>
-            <p class="lead my-3"> Playing now</p>
+            <h1 class="display-4"><strong>MOVIE TIME</strong></h1>
+            <p class="lead my-3"> Anytime is pop corn time</p>
         </div>
     </div>
-
+<br>
     <div class="container align-items-center">
         <div class="row justify-content-center">
             <div class="col-8">
                 <table class="table table-sm table-hover" id="movie-table">
                     <thead>
-                        <h4>Current movie schedule</h4>
+                        <h5>Current movie schedule</h5>
                         <tr>
                             <th scope="col">Movie name</th>
                             <th scope="col">Genre</th>
@@ -49,7 +49,7 @@
     <div class="container align-items-center">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h4>Add a movie</h4>
+                <h5>Add a movie</h5>
                 <hr />
                 <form>
                     <div class="form-group">
@@ -61,12 +61,12 @@
                         <input class="form-control" id="input-movie-genre">
                     </div>
                     <div class="form-group">
-                        <label>Frequency (HH:mm - military time)</label>
+                        <label>Frequency (min)</label>
                         <input class="form-control" id="input-movie-frequency">
                     </div>
                     <div class="form-group">
-                        <label>Next showtime</label>
-                        <input class="form-control" id="input-time-next">
+                        <label>First showtime (HH:mm - military time)</label>
+                        <input class="form-control" id="input-first-showtime">
                     </div>
                     <button type="submit" id="add-movie-btn" class="btn btn-primary">Submit</button>
                 </form>
