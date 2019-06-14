@@ -60,7 +60,7 @@ database.ref().on("child_added", function(childSnapshot) {
     console.log(movieFreq);
     console.log(movieTime);
 
-    // var empStartPretty = moment.unix(movTime).format("HH:mm");
+    
     var nextShowTime = moment(movieTime, "HH:mm");
     var now = moment();
 
@@ -76,9 +76,9 @@ database.ref().on("child_added", function(childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(movieName),
         $("<td>").text(movieGenre),
-        $("<td>").text(movieFreq),
+        $("<td>").text(movieFreq + " min"),
         $("<td>").text(nextShowTime.format("HH:mm")),
-        $("<td>").text(nextShowTimeIn)
+        $("<td>").text(nextShowTimeIn + " min")
       );
     
       // Append the new row to the table
